@@ -1,4 +1,4 @@
-package br.com.lucolimac.moviesmanager
+package br.com.lucolimac.moviesmanager.presentation.activity
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import br.com.lucolimac.moviesmanager.R
 import br.com.lucolimac.moviesmanager.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
