@@ -11,4 +11,6 @@
     <string name="label_release">%1s - %2smin</string>
     <string name="label_watched">Asistido</string>
     <string name="label_delete">Deletar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Deletar</string>
 </resources>

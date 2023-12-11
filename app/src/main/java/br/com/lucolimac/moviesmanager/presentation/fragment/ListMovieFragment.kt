@@ -22,7 +22,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     private var _binding: FragmentListMovieBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
-    private val movieAdapter: MovieAdapter by inject()
+    private val movieAdapter: MovieAdapter by inject { parametersOf(this) }
     private val separator: Separator by inject { parametersOf(16) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

@@ -65,10 +65,11 @@
             android:text="@string/label_watched" />
 
         <TextView
+            android:id="@+id/btDeleteMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginVertical="8dp"
+            android:gravity="center_vertical"
             android:text="@string/label_delete"
             app:drawableStartCompat="@android:drawable/ic_menu_delete" />
 

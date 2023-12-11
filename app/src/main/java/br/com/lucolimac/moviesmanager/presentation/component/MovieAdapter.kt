@@ -3,13 +3,16 @@ package br.com.lucolimac.moviesmanager.presentation.component
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import br.com.lucolimac.moviesmanager.R
 import br.com.lucolimac.moviesmanager.databinding.CellMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff) {
+class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff) {
     private lateinit var context: Context
 
     inner class MovieViewHolder(private val binding: CellMovieBinding) : ViewHolder(binding.root) {
@@ -20,6 +23,33 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff)
                 tvYearDurationMovie.text = movie.getReleaseYearWithDuration()
                 checkWasWatchMovie.isChecked = movie.hasWatched
                 tvRatinMovie.text = movie.getRatingFormatted()
+                btDeleteMovie.setOnClickListener {
+                    movieOnClickListener.onDeleteClick(movie)
+                }
+                checkWasWatchMovie.setOnClickListener {
+                    movieOnClickListener.onWatchedClick(movie, it.isActivated)
+                }
+                root.setOnLongClickListener {
+                    val popupMenu = PopupMenu(it.context, it)
+
+                    // Inflating popup menu from popup_menu.xml file
+                    popupMenu.menuInflater.inflate(R.menu.action_menu, popupMenu.menu)
+                    popupMenu.setOnMenuItemClickListener { menuItem ->
+                        when (menuItem.itemId) {
+                            R.id.actionChangeMovie -> movieOnClickListener.onUpdateClick(
+                                movie
+                            )
+
+                            R.id.actionRatingMovie -> movieOnClickListener.onRatingClick(
+                                movie, 0
+                            )
+
+                        }
+                        true
+                    }
+                    popupMenu.show()
+                    true
+                }
             }
         }
     }
