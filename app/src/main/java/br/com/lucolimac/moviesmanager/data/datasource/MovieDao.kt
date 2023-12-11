@@ -13,7 +13,7 @@ interface MovieDao {
     fun createMovie(movieModel: MovieModel)
 
     @Query("SELECT * FROM moviemodel ORDER BY name")
-    suspend fun getMovies(): List<MovieModel>
+    suspend fun getAllMovies(): List<MovieModel>
 
     @Update
     suspend fun updateMovie(movieModel: MovieModel)
