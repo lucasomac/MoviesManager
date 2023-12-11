@@ -5,17 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import br.com.lucolimac.moviesmanager.R
 import br.com.lucolimac.moviesmanager.databinding.FragmentListMovieBinding
-import br.com.lucolimac.moviesmanager.domain.entity.Gender
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
+import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListener
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
+import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class ListMovieFragment : Fragment() {
+class ListMovieFragment : Fragment(), MovieOnClickListener {
 
     private var _binding: FragmentListMovieBinding? = null
     private val binding get() = _binding!!
-
+    private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
+    private val movieAdapter: MovieAdapter by inject()
+    private val separator: Separator by inject { parametersOf(16) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -27,23 +35,39 @@ class ListMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MovieAdapter().apply {
-            submitList(
-                listOf(
-                    Movie("Vingadores", 2023, "Marvel", 345L, Gender.ADVENTURE),
-                    Movie("Tico e Teco", 2020, "Disney", 125L, Gender.COMEDY)
-                )
-            )
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        movieViewModel.listOfMovies.observe(requireActivity()) {
+            movieAdapter.submitList(it)
+            binding.recyclerListMovie.adapter = movieAdapter
+            binding.recyclerListMovie.addItemDecoration(separator)
         }
-        binding.recyclerListMovie.adapter = adapter
-        binding.recyclerListMovie.addItemDecoration(Separator(16))
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onEraseClick(movie: Movie) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onRatingClick(movie: Movie, rating: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onWatchedClick(movie: Movie) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(movie: Movie) {
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
+    override fun onLongClick(movie: Movie) {
+        TODO("Not yet implemented")
     }
 }
