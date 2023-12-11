@@ -9,9 +9,9 @@ data class Movie(
     val releaseYear: Long,
     val producerStudio: String,
     val duration: Long,
+    val gender: Gender,
     val hasWatched: Boolean = false,
-    val rating: Long? = null,
-    val gender: Gender
+    val rating: Long? = null
 ) : Parcelable {
     fun getReleaseYearWithDuration() = "$releaseYear - ${duration}min"
     fun getRatingFormatted() = if (rating == null) "N/A" else "$rating/10"

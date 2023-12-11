@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.fragment.NavHostFragment
 import br.com.lucolimac.moviesmanager.R
 import br.com.lucolimac.moviesmanager.databinding.ActivityMainBinding
 
@@ -24,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = findNavController(R.id.navHostFragment)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

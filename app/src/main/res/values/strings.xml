@@ -9,4 +9,6 @@
 
     <string name="label_rating">%1s/10</string>
     <string name="label_release">%1s - %2smin</string>
+    <string name="label_watched">Asistido</string>
+    <string name="label_delete">Deletar</string>
 </resources>
