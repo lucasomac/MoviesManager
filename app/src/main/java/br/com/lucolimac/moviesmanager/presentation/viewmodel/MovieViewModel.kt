@@ -15,4 +15,22 @@ class MovieViewModel : ViewModel() {
     )
     val listOfMovies: LiveData<List<Movie>> = _listOfMovies
 
+    fun createMovie(movie: Movie) {
+
+    }
+
+    fun updateMovie(movie: Movie) {
+
+    }
+
+    fun deleteMovie(movie: Movie) {
+
+    }
+
+    fun ratingMovie(movie: Movie, rating: Int) {
+
+    }
+    fun watchMovie(movie: Movie, hasWatched: Boolean) {
+
+    }
 }

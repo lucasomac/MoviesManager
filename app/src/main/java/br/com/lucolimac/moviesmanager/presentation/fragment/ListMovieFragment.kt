@@ -51,23 +51,23 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
         _binding = null
     }
 
-    override fun onEraseClick(movie: Movie) {
-        TODO("Not yet implemented")
+    override fun onDeleteClick(movie: Movie) {
+        movieViewModel.deleteMovie(movie)
+    }
+
+    override fun onUpdateClick(movie: Movie) {
+        movieViewModel.updateMovie(movie)
     }
 
     override fun onRatingClick(movie: Movie, rating: Int) {
-        TODO("Not yet implemented")
+        movieViewModel.ratingMovie(movie, rating)
     }
 
-    override fun onWatchedClick(movie: Movie) {
-        TODO("Not yet implemented")
+    override fun onWatchedClick(movie: Movie, hasWatched: Boolean) {
+        movieViewModel.watchMovie(movie, hasWatched)
     }
 
     override fun onClick(movie: Movie) {
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-    }
-
-    override fun onLongClick(movie: Movie) {
-        TODO("Not yet implemented")
     }
 }
