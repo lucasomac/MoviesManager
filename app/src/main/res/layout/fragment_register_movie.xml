@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +16,8 @@
             android:id="@+id/tilName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_name">
+            android:hint="@string/hint_name"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -26,7 +28,8 @@
             android:id="@+id/tilProducer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_producer">
+            android:hint="@string/hint_producer"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -37,7 +40,8 @@
             android:id="@+id/tilYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_year">
+            android:hint="@string/hint_year"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -49,7 +53,8 @@
             android:id="@+id/tilDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_duration">
+            android:hint="@string/hint_duration"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -58,6 +63,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp" />
@@ -66,7 +72,8 @@
             android:id="@+id/checkWatched"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_already_watched" />
+            android:text="@string/label_already_watched"
+            app:errorEnabled="true" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingBar"
