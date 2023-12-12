@@ -17,7 +17,7 @@ class MovieModel(
     val duration: Long,
     val gender: String,
     val hasWatched: Boolean,
-    val rating: Long?
+    val rating: Int?
 ) : Parcelable {
     fun toEntity(): Movie {
         return Movie(
@@ -40,7 +40,7 @@ class MovieModel(
                 movie.releaseYear,
                 movie.producerStudio,
                 movie.duration,
-                movie.gender.description,
+                movie.gender.name,
                 movie.hasWatched,
                 movie.rating
             )

@@ -74,7 +74,6 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
                 return oldItem.name == newItem.name
             }
-
         }
     }
 }

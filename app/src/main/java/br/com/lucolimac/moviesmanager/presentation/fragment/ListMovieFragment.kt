@@ -27,10 +27,9 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentListMovieBinding.inflate(inflater, container, false)
+        movieViewModel.getAllMovies()
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
