@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragment.DetailMovieFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvNameMovie"
+            style="@style/TitleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Wonder Woman 1984" />
+
+        <TextView
+            android:id="@+id/tvProducerMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="DC Comics" />
+
+        <TextView
+            android:id="@+id/tvYearDurationMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="2022 - 160min" />
+
+        <CheckBox
+            android:id="@+id/checkWasWatchMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/label_watched" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:isIndicator="true"
+            android:max="10"
+            android:numStars="5"
+            android:stepSize="0.5" />
+
+        <TextView
+            android:id="@+id/tvRatingMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="8/10" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

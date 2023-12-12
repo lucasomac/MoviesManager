@@ -29,6 +29,9 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                 checkWasWatchMovie.setOnCheckedChangeListener { _, isChecked ->
                     movieOnClickListener.onWatchedClick(movie, isChecked)
                 }
+                root.setOnClickListener {
+                    movieOnClickListener.onClick(movie)
+                }
                 root.setOnLongClickListener {
                     val popupMenu = PopupMenu(it.context, it)
 

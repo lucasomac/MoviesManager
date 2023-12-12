@@ -2,8 +2,8 @@
     <string name="app_name">MoviesManager</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="list_fragment_label">Lista de Filmes</string>
+    <string name="detail_fragment_label">Detalhes do Filme</string>
 
     <string name="button_add_movie">Botão adicionar filme</string>
 

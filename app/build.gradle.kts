@@ -2,7 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
 }
 ext.properties["navigationVersion"] = "2.7.5"
 ext.properties["roomVersion"] = "2.6.1"

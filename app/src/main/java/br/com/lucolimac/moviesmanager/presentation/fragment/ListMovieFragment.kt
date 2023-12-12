@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import br.com.lucolimac.moviesmanager.R
 import br.com.lucolimac.moviesmanager.databinding.FragmentListMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
@@ -72,6 +71,10 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     }
 
     override fun onClick(movie: Movie) {
-        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        findNavController().navigate(
+            ListMovieFragmentDirections.actionFirstFragmentToSecondFragment(
+                movie
+            )
+        )
     }
 }

@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/ListFragment"
         android:name="br.com.lucolimac.moviesmanager.presentation.fragment.ListMovieFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list_movie">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/DetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="br.com.lucolimac.moviesmanager.presentation.fragment.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/DetailFragment"
+        android:name="br.com.lucolimac.moviesmanager.presentation.fragment.DetailMovieFragment"
+        android:label="@string/detail_fragment_label"
+        tools:layout="@layout/fragment_detail_movie">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/ListFragment" />
+        <argument
+            android:name="movie"
+            app:argType="br.com.lucolimac.moviesmanager.domain.entity.Movie" />
     </fragment>
 </navigation>
