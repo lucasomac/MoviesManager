@@ -35,13 +35,13 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
+        binding.recyclerListMovie.addItemDecoration(separator)
     }
 
     private fun setupObserver() {
         movieViewModel.listOfMovies.observe(requireActivity()) {
             movieAdapter.submitList(it)
             binding.recyclerListMovie.adapter = movieAdapter
-            binding.recyclerListMovie.addItemDecoration(separator)
         }
     }
 
