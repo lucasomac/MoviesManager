@@ -11,6 +11,7 @@ import br.com.lucolimac.moviesmanager.databinding.FragmentListMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
 import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListener
+import br.com.lucolimac.moviesmanager.presentation.component.RatingDialog
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
 import org.koin.android.ext.android.inject
@@ -59,7 +60,8 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     }
 
     override fun onRatingClick(movie: Movie, rating: Int) {
-        movieViewModel.ratingMovie(movie, rating)
+        RatingDialog(requireContext()).show()
+//        movieViewModel.ratingMovie(movie, rating)
     }
 
     override fun onWatchedClick(movie: Movie, hasWatched: Boolean) {

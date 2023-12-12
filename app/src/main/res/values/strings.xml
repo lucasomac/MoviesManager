@@ -13,4 +13,8 @@
     <string name="label_delete">Deletar</string>
     <string name="edit">Editar</string>
     <string name="delete">Deletar</string>
+    <string name="title_which_rating_for_movie">Qual nota você dá para este filme?</string>
+    <string name="to_rating">Dar nota</string>
+    <string name="cancel">Cancelar</string>
+    <string name="send">Enviar</string>
 </resources>

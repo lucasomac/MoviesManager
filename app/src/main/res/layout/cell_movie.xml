@@ -28,11 +28,8 @@
             android:id="@+id/tvNameMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            tools:text="Wonder Woman 1984" />
+            tools:text="Wonder Woman 1984"
+            style="@style/TitleBold" />
 
         <TextView
             android:id="@+id/tvProducerMovie"
