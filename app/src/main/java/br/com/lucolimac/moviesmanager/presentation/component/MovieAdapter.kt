@@ -41,7 +41,7 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                             )
 
                             R.id.actionRatingMovie -> movieOnClickListener.onRatingClick(
-                                movie, 0
+                                movie
                             )
 
                         }

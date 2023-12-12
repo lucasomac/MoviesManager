@@ -6,6 +6,6 @@ interface MovieOnClickListener {
     fun onClick(movie: Movie)
     fun onDeleteClick(movie: Movie)
     fun onUpdateClick(movie: Movie)
-    fun onRatingClick(movie: Movie, rating: Int)
+    fun onRatingClick(movie: Movie)
     fun onWatchedClick(movie: Movie, hasWatched: Boolean)
 }

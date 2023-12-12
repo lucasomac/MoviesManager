@@ -4,8 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import br.com.lucolimac.moviesmanager.databinding.RatingDialogBinding
+import br.com.lucolimac.moviesmanager.domain.entity.Movie
 
-class RatingDialog(private val context: Context) : Dialog(context) {
+class RatingDialog(
+    context: Context,
+    private val movie: Movie,
+    private val sendRatingValue: (Movie, Int) -> Unit
+) : Dialog(context) {
     private val binding: RatingDialogBinding by lazy {
         RatingDialogBinding.inflate(layoutInflater)
     }
@@ -13,5 +18,16 @@ class RatingDialog(private val context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        binding.apply {
+            btCancel.setOnClickListener { dismiss() }
+            btSend.setOnClickListener {
+                sendRatingValue(movie, ratingBar.rating.toInt())
+                dismiss()
+            }
+        }
     }
 }

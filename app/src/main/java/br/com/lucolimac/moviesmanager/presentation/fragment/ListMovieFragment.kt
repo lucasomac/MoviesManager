@@ -46,6 +46,10 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
         }
     }
 
+    private fun sendRatingValue(movie: Movie, rating: Int) {
+        movieViewModel.ratingMovie(movie, rating)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -59,9 +63,8 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
         movieViewModel.updateMovie(movie)
     }
 
-    override fun onRatingClick(movie: Movie, rating: Int) {
-        RatingDialog(requireContext()).show()
-//        movieViewModel.ratingMovie(movie, rating)
+    override fun onRatingClick(movie: Movie) {
+        RatingDialog(requireContext(), movie, ::sendRatingValue).show()
     }
 
     override fun onWatchedClick(movie: Movie, hasWatched: Boolean) {
