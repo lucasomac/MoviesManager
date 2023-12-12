@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.lucolimac.moviesmanager.domain.entity.Gender
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
+import br.com.lucolimac.moviesmanager.domain.usecase.MovieUseCase
 
-class MovieViewModel : ViewModel() {
+class MovieViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
     private val _listOfMovies = MutableLiveData(
         listOf(
-            Movie("Vingadores", 2023, "Marvel", 345L, Gender.ADVENTURE),
-            Movie("Tico e Teco", 2020, "Disney", 125L, Gender.COMEDY)
+            Movie(1, "Vingadores", 2023, "Marvel", 345, Gender.ADVENTURE),
+            Movie(2, "Tico e Teco", 2020, "Disney", 125, Gender.COMEDY),
+            Movie(3, "Mulher Maravilha", 2020, "Disney", 125, Gender.ADVENTURE, rating = 10)
         )
     )
     val listOfMovies: LiveData<List<Movie>> = _listOfMovies
@@ -30,6 +32,7 @@ class MovieViewModel : ViewModel() {
     fun ratingMovie(movie: Movie, rating: Int) {
 
     }
+
     fun watchMovie(movie: Movie, hasWatched: Boolean) {
 
     }
