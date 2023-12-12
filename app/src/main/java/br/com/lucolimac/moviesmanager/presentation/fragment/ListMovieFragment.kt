@@ -35,7 +35,18 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
-        binding.recyclerListMovie.addItemDecoration(separator)
+        setupView()
+    }
+
+    private fun setupView() {
+        binding.apply {
+            recyclerListMovie.addItemDecoration(separator)
+            fab.setOnClickListener {
+                findNavController().navigate(
+                    ListMovieFragmentDirections.actionListFragmentToRegisterMovieFragment()
+                )
+            }
+        }
     }
 
     private fun setupObserver() {
@@ -59,7 +70,11 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     }
 
     override fun onUpdateClick(movie: Movie) {
-        movieViewModel.updateMovie(movie)
+        findNavController().navigate(
+            ListMovieFragmentDirections.actionListFragmentToRegisterMovieFragment(
+                movie
+            )
+        )
     }
 
     override fun onRatingClick(movie: Movie) {
