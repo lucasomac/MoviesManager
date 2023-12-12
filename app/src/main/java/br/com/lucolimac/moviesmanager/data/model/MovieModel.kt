@@ -2,12 +2,13 @@ package br.com.lucolimac.moviesmanager.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import br.com.lucolimac.moviesmanager.domain.entity.Gender
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import kotlinx.parcelize.Parcelize
 
-@Entity
+@Entity(indices = [Index(value = ["name"], unique = true)])
 @Parcelize
 class MovieModel(
     @PrimaryKey(autoGenerate = true) val id: Long,

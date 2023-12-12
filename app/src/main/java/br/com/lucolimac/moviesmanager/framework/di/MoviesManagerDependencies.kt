@@ -19,7 +19,7 @@ object MoviesManagerDependencies {
         single {
             Room.databaseBuilder(
                 androidContext(), MovieDatabase::class.java, MovieDatabase.DATABASE_NAME
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
         single<MovieDao> {
             get<MovieDatabase>().favoriteLinkDAO()
