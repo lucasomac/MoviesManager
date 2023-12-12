@@ -26,8 +26,8 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                 btDeleteMovie.setOnClickListener {
                     movieOnClickListener.onDeleteClick(movie)
                 }
-                checkWasWatchMovie.setOnClickListener {
-                    movieOnClickListener.onWatchedClick(movie, it.isActivated)
+                checkWasWatchMovie.setOnCheckedChangeListener { _, isChecked ->
+                    movieOnClickListener.onWatchedClick(movie, isChecked)
                 }
                 root.setOnLongClickListener {
                     val popupMenu = PopupMenu(it.context, it)
