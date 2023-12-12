@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.lucolimac.moviesmanager.domain.entity.Gender
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.domain.usecase.MovieUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,9 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MovieViewModel(
-    private val movieUseCase: MovieUseCase,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val movieUseCase: MovieUseCase
 ) : ViewModel() {
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
     private val _listOfMovies = MutableLiveData<List<Movie>>()
     val listOfMovies: LiveData<List<Movie>> = _listOfMovies
     fun getAllMovies() {
