@@ -17,8 +17,6 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff), Filterable {
     private lateinit var context: Context
     var originalList: List<Movie> = listOf()
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         context = parent.context
         val inflater = LayoutInflater.from(parent.context)

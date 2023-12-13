@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:hint="@string/hint_input_movie_name"
         app:endIconMode="clear_text"
+        app:hintAnimationEnabled="true"
         app:layout_constraintEnd_toStartOf="@id/btnFilter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

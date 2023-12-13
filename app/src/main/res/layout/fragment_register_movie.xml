@@ -66,7 +66,11 @@
             android:id="@+id/spinnerGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            android:background="@drawable/blue_outline"
+            android:minHeight="48dp"
+            android:popupBackground="@drawable/blue_outline_white_background"
+            android:spinnerMode="dropdown"
+            tools:listitem="@layout/spinner_item" />
 
         <CheckBox
             android:id="@+id/checkWatched"
