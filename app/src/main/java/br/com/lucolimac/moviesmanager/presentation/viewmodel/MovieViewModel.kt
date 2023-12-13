@@ -1,24 +1,25 @@
 package br.com.lucolimac.moviesmanager.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.domain.usecase.MovieUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MovieViewModel(
     private val movieUseCase: MovieUseCase
 ) : ViewModel() {
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-    private val _listOfMovies = MutableLiveData<List<Movie>>()
-    val listOfMovies: LiveData<List<Movie>> = _listOfMovies
+    private val _listOfMovies = MutableStateFlow<List<Movie>>(listOf())
+    val listOfMovies: StateFlow<List<Movie>> = _listOfMovies.asStateFlow()
     fun getAllMovies() {
         viewModelScope.launch(dispatcher) {
-            _listOfMovies.postValue(movieUseCase.getAllMovies())
+            _listOfMovies.value = movieUseCase.getAllMovies()
         }
     }
 

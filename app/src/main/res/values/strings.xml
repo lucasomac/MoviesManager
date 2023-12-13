@@ -25,4 +25,5 @@
     <string name="hint_duration">Duração:</string>
     <string name="label_already_watched">Já assisti?</string>
     <string name="label_save">Salvar</string>
+    <string name="hint_input_movie_name">Digite o nome do filme</string>
 </resources>

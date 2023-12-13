@@ -1,5 +1,6 @@
 package br.com.lucolimac.moviesmanager.presentation.fragment
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
-import android.R
 
 
 class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -86,10 +86,10 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 )
                 if (isEdit) {
                     movieViewModel.updateMovie(movie)
-                    findNavController().popBackStack()
+                    findNavController().navigateUp()
                 } else {
                     movieViewModel.createMovie(movie)
-                    findNavController().popBackStack()
+                    findNavController().navigateUp()
                 }
             } else return@setOnClickListener
         }

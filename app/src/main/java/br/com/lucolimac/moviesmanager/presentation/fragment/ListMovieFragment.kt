@@ -1,10 +1,15 @@
 package br.com.lucolimac.moviesmanager.presentation.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.moviesmanager.databinding.FragmentListMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
@@ -13,6 +18,7 @@ import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListene
 import br.com.lucolimac.moviesmanager.presentation.component.RatingDialog
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -28,7 +34,6 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListMovieBinding.inflate(inflater, container, false)
-        movieViewModel.getAllMovies()
         return binding.root
     }
 
@@ -36,6 +41,11 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
         setupView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        movieViewModel.getAllMovies()
     }
 
     private fun setupView() {
@@ -46,13 +56,33 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
                     ListMovieFragmentDirections.actionListFragmentToRegisterMovieFragment()
                 )
             }
+            etSearch.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                    movieAdapter.filter.filter(s)
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    movieAdapter.filter.filter(s)
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    movieAdapter.filter.filter(s)
+                }
+
+            })
         }
     }
 
     private fun setupObserver() {
-        movieViewModel.listOfMovies.observe(requireActivity()) {
-            movieAdapter.submitList(it)
-            binding.recyclerListMovie.adapter = movieAdapter
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                movieViewModel.listOfMovies.collect {
+                    movieAdapter.submitList(it)
+                    binding.recyclerListMovie.adapter = movieAdapter
+                }
+            }
         }
     }
 

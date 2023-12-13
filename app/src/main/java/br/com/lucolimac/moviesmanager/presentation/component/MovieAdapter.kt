@@ -3,6 +3,8 @@ package br.com.lucolimac.moviesmanager.presentation.component
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,8 +14,49 @@ import br.com.lucolimac.moviesmanager.databinding.CellMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
 
 class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
-    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff) {
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(movieDiff), Filterable {
     private lateinit var context: Context
+    var originalList: List<Movie> = listOf()
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        context = parent.context
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CellMovieBinding.inflate(inflater, parent, false)
+        return MovieViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                if (originalList.isEmpty()) originalList = currentList
+                val charSearch = constraint.toString()
+                val results = FilterResults().apply {
+                    values = if (charSearch.isEmpty() || charSearch.isBlank()) {
+                        originalList
+                    } else {
+                        onFilter(originalList, charSearch)
+                    }
+                }
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                submitList((results?.values as? List<Movie>)?.toMutableList())
+            }
+
+        }
+    }
+
+    private fun onFilter(list: List<Movie>, constraint: String): List<Movie> {
+        return list.filter {
+            it.name.contains(constraint, true)
+        }
+    }
 
     inner class MovieViewHolder(private val binding: CellMovieBinding) : ViewHolder(binding.root) {
         fun bind(movie: Movie) {
@@ -55,17 +98,6 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                 }
             }
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        context = parent.context
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = CellMovieBinding.inflate(inflater, parent, false)
-        return MovieViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
     }
 
     companion object {
