@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.moviesmanager.databinding.FragmentListMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
+import br.com.lucolimac.moviesmanager.domain.entity.Sort
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
 import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListener
 import br.com.lucolimac.moviesmanager.presentation.component.RatingDialog
@@ -72,6 +73,16 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
                 }
 
             })
+            btnFilter.setOnClickListener {
+                FilterBottomSheet(::onChangeSortSelection).show(parentFragmentManager, "")
+            }
+        }
+    }
+
+    private fun onChangeSortSelection(sort: Sort) {
+        when (sort) {
+            Sort.NAME -> movieAdapter.submitList(movieAdapter.currentList.sortedBy { it.name })
+            Sort.RATING -> movieAdapter.submitList(movieAdapter.currentList.sortedBy { it.rating })
         }
     }
 

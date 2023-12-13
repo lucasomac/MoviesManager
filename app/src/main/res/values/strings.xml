@@ -26,4 +26,7 @@
     <string name="label_already_watched">Já assisti?</string>
     <string name="label_save">Salvar</string>
     <string name="hint_input_movie_name">Digite o nome do filme</string>
+    <string name="label_choose_your_sort">Escolha sua ordenação</string>
+    <string name="label_rating_name">Nota</string>
+    <string name="label_name">Nome</string>
 </resources>
