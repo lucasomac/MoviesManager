@@ -64,6 +64,7 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                 tvYearDurationMovie.text = movie.getReleaseYearWithDuration()
                 checkWasWatchMovie.isChecked = movie.hasWatched
                 tvRatinMovie.text = movie.getRatingFormatted()
+                tvYearGenderMovie.text = movie.gender.toString()
                 btDeleteMovie.setOnClickListener {
                     movieOnClickListener.onDeleteClick(movie)
                 }
@@ -87,7 +88,6 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
                             R.id.actionRatingMovie -> movieOnClickListener.onRatingClick(
                                 movie
                             )
-
                         }
                         true
                     }

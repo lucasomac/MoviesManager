@@ -26,10 +26,10 @@
 
         <TextView
             android:id="@+id/tvNameMovie"
+            style="@style/TitleBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Wonder Woman 1984"
-            style="@style/TitleBold" />
+            tools:text="Wonder Woman 1984" />
 
         <TextView
             android:id="@+id/tvProducerMovie"
@@ -42,6 +42,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="2022 - 160min" />
+
+        <TextView
+            android:id="@+id/tvYearGenderMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Aventura" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat

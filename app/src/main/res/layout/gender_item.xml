@@ -2,11 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/country_item_height"
-    android:paddingLeft="@dimen/general_margin"
-    android:paddingRight="@dimen/general_margin">
+    android:paddingHorizontal="16dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivCountry"
+        android:id="@+id/ivGender"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_alignParentStart="true"
@@ -14,17 +13,18 @@
         tools:src="@android:drawable/ic_menu_myplaces" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCountry"
+        android:id="@+id/tvGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/general_margin"
-        android:layout_toEndOf="@id/ivCountry"
+        android:layout_toEndOf="@id/ivGender"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         tools:text="United Kingdom" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrowBackIndicator"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_alignParentEnd="true"

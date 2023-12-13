@@ -29,4 +29,5 @@
     <string name="label_choose_your_sort">Escolha sua ordenação</string>
     <string name="label_rating_name">Nota</string>
     <string name="label_name">Nome</string>
+    <string name="header_select_gender">Selecione o gênero</string>
 </resources>

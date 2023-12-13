@@ -70,7 +70,7 @@
             android:minHeight="48dp"
             android:popupBackground="@drawable/blue_outline_white_background"
             android:spinnerMode="dropdown"
-            tools:listitem="@layout/spinner_item" />
+            tools:listitem="@layout/gender_item" />
 
         <CheckBox
             android:id="@+id/checkWatched"

@@ -1,21 +1,21 @@
 package br.com.lucolimac.moviesmanager.presentation.fragment
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.lucolimac.moviesmanager.databinding.FragmentRegisterMovieBinding
 import br.com.lucolimac.moviesmanager.domain.entity.Gender
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
+import br.com.lucolimac.moviesmanager.presentation.component.GenderAdapter
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.properties.Delegates
 
 
@@ -25,8 +25,8 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private val args: RegisterMovieFragmentArgs by navArgs()
     private var isEdit by Delegates.notNull<Boolean>()
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
-    private var isAllFieldsChecked: MutableLiveData<Boolean> = MutableLiveData(false)
-    private lateinit var genderSelected: Gender
+    private var genderSelected: Gender? = null
+    private val genderAdapter: GenderAdapter by inject { parametersOf(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -60,15 +60,9 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun setupSpinnerGender() {
-        val spinnerAdapter: ArrayAdapter<Gender> = ArrayAdapter<Gender>(
-            requireContext(), R.layout.simple_spinner_item, Gender.entries.toTypedArray()
-        )
-        spinnerAdapter.setDropDownViewResource(
-            R.layout.simple_spinner_dropdown_item
-        )
         binding.spinnerGender.apply {
             onItemSelectedListener = this@RegisterMovieFragment
-            adapter = spinnerAdapter
+            adapter = genderAdapter
         }
     }
 
@@ -80,7 +74,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     releaseYear = binding.tilYear.editText?.text.toString().toLong(),
                     producerStudio = binding.tilProducer.editText?.text.toString(),
                     duration = binding.tilDuration.editText?.text.toString().toLong(),
-                    gender = genderSelected,
+                    gender = genderSelected!!,
                     hasWatched = binding.checkWatched.isChecked,
                     rating = if (binding.ratingBar.rating != 0.0F) (binding.ratingBar.rating * 2).toInt() else null
                 )
@@ -121,6 +115,11 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 false
             }
 
+            genderSelected == null -> {
+                binding.spinnerGender.requestFocus()
+                false
+            }
+
             else -> true
         }
     }
@@ -131,7 +130,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        genderSelected = Gender.entries.toTypedArray()[position]
+        genderSelected = if (position == 0) null else Gender.entries[position]
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

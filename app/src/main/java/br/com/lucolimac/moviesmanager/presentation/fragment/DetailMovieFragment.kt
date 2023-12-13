@@ -32,6 +32,7 @@ class DetailMovieFragment : Fragment() {
             tvProducerMovie.text = movie.producerStudio
             tvYearDurationMovie.text = movie.getReleaseYearWithDuration()
             tvRatingMovie.text = movie.getRatingFormatted()
+            tvGenderMovie.text = movie.gender.toString()
             movie.rating?.let {
                 ratingBar.rating = it.toFloat() / 2.0F
             }

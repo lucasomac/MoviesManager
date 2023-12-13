@@ -6,6 +6,7 @@ import br.com.lucolimac.moviesmanager.data.repository.MovieRepositoryImpl
 import br.com.lucolimac.moviesmanager.domain.usecase.MovieUseCase
 import br.com.lucolimac.moviesmanager.framework.datasource.MovieDatabase
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
+import br.com.lucolimac.moviesmanager.presentation.component.GenderAdapter
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
 import org.koin.android.ext.koin.androidContext
@@ -27,6 +28,7 @@ object MoviesManagerDependencies {
         viewModelOf(::MovieViewModel)
         factoryOf(::Separator)
         factoryOf(::MovieAdapter)
+        factoryOf(::GenderAdapter)
         factoryOf(::MovieRepositoryImpl) { bind<MovieUseCase>() }
     }
 }
