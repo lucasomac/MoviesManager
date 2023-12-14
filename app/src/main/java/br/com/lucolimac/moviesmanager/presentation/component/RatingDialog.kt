@@ -25,7 +25,7 @@ class RatingDialog(
         binding.apply {
             btCancel.setOnClickListener { dismiss() }
             btSend.setOnClickListener {
-                sendRatingValue(movie, ratingBar.rating.toInt())
+                sendRatingValue(movie, (ratingBar.rating * 2).toInt())
                 dismiss()
             }
         }

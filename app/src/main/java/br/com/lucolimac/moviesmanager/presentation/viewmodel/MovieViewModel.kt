@@ -3,6 +3,7 @@ package br.com.lucolimac.moviesmanager.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.lucolimac.moviesmanager.domain.entity.Movie
+import br.com.lucolimac.moviesmanager.domain.entity.Sort
 import br.com.lucolimac.moviesmanager.domain.usecase.MovieUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +18,12 @@ class MovieViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
     private val _listOfMovies = MutableStateFlow<List<Movie>>(listOf())
     val listOfMovies: StateFlow<List<Movie>> = _listOfMovies.asStateFlow()
-    fun getAllMovies() {
+    fun getAllMovies(sort: Sort = Sort.NAME) {
         viewModelScope.launch(dispatcher) {
-            _listOfMovies.value = movieUseCase.getAllMovies()
+            when (sort) {
+                Sort.NAME -> _listOfMovies.value = movieUseCase.getAllMoviesByName()
+                Sort.RATING -> _listOfMovies.value = movieUseCase.getAllMoviesByRating()
+            }
         }
     }
 

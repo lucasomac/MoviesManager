@@ -9,5 +9,6 @@ interface MovieUseCase {
 
     suspend fun deleteMovie(movie: Movie)
 
-    suspend fun getAllMovies(): List<Movie>
+    suspend fun getAllMoviesByName(): List<Movie>
+    suspend fun getAllMoviesByRating(): List<Movie>
 }

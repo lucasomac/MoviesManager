@@ -16,7 +16,6 @@ import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.domain.entity.Sort
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
 import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListener
-import br.com.lucolimac.moviesmanager.presentation.component.RatingDialog
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
 import kotlinx.coroutines.launch
@@ -31,6 +30,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
     private val movieAdapter: MovieAdapter by inject { parametersOf(this) }
     private val separator: Separator by inject { parametersOf(16) }
+    private val sortSheet = SortBottomSheet(::onChangeSortSelection)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -62,43 +62,39 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
                     s: CharSequence?, start: Int, count: Int, after: Int
                 ) {
                     movieAdapter.filter.filter(s)
+                    movieAdapter.notifyDataSetChanged()
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     movieAdapter.filter.filter(s)
+                    movieAdapter.notifyDataSetChanged()
                 }
 
                 override fun afterTextChanged(s: Editable?) {
                     movieAdapter.filter.filter(s)
+                    movieAdapter.notifyDataSetChanged()
                 }
 
             })
             btnFilter.setOnClickListener {
-                FilterBottomSheet(::onChangeSortSelection).show(parentFragmentManager, "")
+                SortBottomSheet(::onChangeSortSelection).show(parentFragmentManager, "")
             }
         }
     }
 
     private fun onChangeSortSelection(sort: Sort) {
-        when (sort) {
-            Sort.NAME -> movieAdapter.submitList(movieAdapter.currentList.sortedBy { it.name })
-            Sort.RATING -> movieAdapter.submitList(movieAdapter.currentList.sortedBy { it.rating })
-        }
+        movieViewModel.getAllMovies(sort)
     }
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 movieViewModel.listOfMovies.collect {
                     movieAdapter.submitList(it)
                     binding.recyclerListMovie.adapter = movieAdapter
                 }
             }
         }
-    }
-
-    private fun sendRatingValue(movie: Movie, rating: Int) {
-        movieViewModel.ratingMovie(movie, rating)
     }
 
     override fun onDestroyView() {
@@ -119,7 +115,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     }
 
     override fun onRatingClick(movie: Movie) {
-        RatingDialog(requireContext(), movie, ::sendRatingValue).show()
+        sortSheet.show(parentFragmentManager, "")
     }
 
     override fun onWatchedClick(movie: Movie, hasWatched: Boolean) {

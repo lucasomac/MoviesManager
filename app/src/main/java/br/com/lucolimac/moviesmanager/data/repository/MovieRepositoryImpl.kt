@@ -18,7 +18,11 @@ class MovieRepositoryImpl(private val movieDao: MovieDao) : MovieUseCase {
         movieDao.deleteMovie(MovieModel.fromEntity(movie))
     }
 
-    override suspend fun getAllMovies(): List<Movie> {
-        return movieDao.getAllMovies().map { it.toEntity() }
+    override suspend fun getAllMoviesByName(): List<Movie> {
+        return movieDao.getAllMoviesByName().map { it.toEntity() }
+    }
+
+    override suspend fun getAllMoviesByRating(): List<Movie> {
+        return movieDao.getAllMoviesByRating().map { it.toEntity() }
     }
 }

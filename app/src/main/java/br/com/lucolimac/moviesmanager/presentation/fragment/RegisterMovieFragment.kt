@@ -25,7 +25,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private val args: RegisterMovieFragmentArgs by navArgs()
     private var isEdit by Delegates.notNull<Boolean>()
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
-    private var genderSelected: Gender? = null
+    private lateinit var genderSelected: Gender
     private val genderAdapter: GenderAdapter by inject { parametersOf(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -74,7 +74,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     releaseYear = binding.tilYear.editText?.text.toString().toLong(),
                     producerStudio = binding.tilProducer.editText?.text.toString(),
                     duration = binding.tilDuration.editText?.text.toString().toLong(),
-                    gender = genderSelected!!,
+                    gender = genderSelected,
                     hasWatched = binding.checkWatched.isChecked,
                     rating = if (binding.ratingBar.rating != 0.0F) (binding.ratingBar.rating * 2).toInt() else null
                 )
@@ -115,11 +115,6 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 false
             }
 
-            genderSelected == null -> {
-                binding.spinnerGender.requestFocus()
-                false
-            }
-
             else -> true
         }
     }
@@ -130,7 +125,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        genderSelected = if (position == 0) null else Gender.entries[position]
+        genderSelected = Gender.entries[position]
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
