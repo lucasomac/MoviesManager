@@ -16,6 +16,7 @@ import br.com.lucolimac.moviesmanager.domain.entity.Movie
 import br.com.lucolimac.moviesmanager.domain.entity.Sort
 import br.com.lucolimac.moviesmanager.presentation.component.MovieAdapter
 import br.com.lucolimac.moviesmanager.presentation.component.MovieOnClickListener
+import br.com.lucolimac.moviesmanager.presentation.component.RatingDialog
 import br.com.lucolimac.moviesmanager.presentation.component.Separator
 import br.com.lucolimac.moviesmanager.presentation.viewmodel.MovieViewModel
 import kotlinx.coroutines.launch
@@ -77,7 +78,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
 
             })
             btnFilter.setOnClickListener {
-                SortBottomSheet(::onChangeSortSelection).show(parentFragmentManager, "")
+                sortSheet.show(parentFragmentManager, "")
             }
         }
     }
@@ -95,6 +96,10 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
                 }
             }
         }
+    }
+
+    private fun sendRatingValue(movie: Movie, rating: Int) {
+        movieViewModel.ratingMovie(movie, rating)
     }
 
     override fun onDestroyView() {
@@ -115,7 +120,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     }
 
     override fun onRatingClick(movie: Movie) {
-        sortSheet.show(parentFragmentManager, "")
+        RatingDialog(requireContext(), movie, ::sendRatingValue).show()
     }
 
     override fun onWatchedClick(movie: Movie, hasWatched: Boolean) {

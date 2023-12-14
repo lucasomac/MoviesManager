@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:endIconMode="clear_text"
+        android:hint="@string/hint_input_movie_name"
         app:hintAnimationEnabled="true"
         app:layout_constraintEnd_toStartOf="@id/btnFilter"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +22,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
-            android:hint="@string/hint_input_movie_name"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_input_text_rounded"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:lines="1" />

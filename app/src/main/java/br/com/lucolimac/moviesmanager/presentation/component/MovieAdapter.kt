@@ -46,7 +46,6 @@ class MovieAdapter(private val movieOnClickListener: MovieOnClickListener) :
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 submitList((results?.values as? List<Movie>)?.toMutableList())
             }
-
         }
     }
 
