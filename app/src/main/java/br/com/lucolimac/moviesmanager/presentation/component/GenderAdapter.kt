@@ -19,34 +19,22 @@ class GenderAdapter(context: Context) : ArrayAdapter<Gender>(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
         val bindingGender = GenderItemBinding.inflate(inflater, parent, false)
-//        val bindingHeader = GenderHeaderBinding.inflate(inflater, parent, false)
         val view: View
-//        if (position == 0) {
-//            setItemHeader(bindingHeader, true)
-//            view = bindingHeader.root
-//        } else {
-            view = bindingGender.root
-            getItem(position)?.let { gender ->
-                setItemGender(bindingGender, gender, true)
-            }
-//        }
+        view = bindingGender.root
+        getItem(position)?.let { gender ->
+            setItemGender(bindingGender, gender, true)
+        }
         return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
         val bindingGender = GenderItemBinding.inflate(inflater, parent, false)
-//        val bindingHeader = GenderHeaderBinding.inflate(inflater, parent, false)
         val view: View
-//        if (position == 0) {
-//            setItemHeader(bindingHeader, false)
-//            view = bindingHeader.root
-//        } else {
-            view = bindingGender.root
-            getItem(position)?.let { gender ->
-                setItemGender(bindingGender, gender, false)
-            }
-//        }
+        view = bindingGender.root
+        getItem(position)?.let { gender ->
+            setItemGender(bindingGender, gender, false)
+        }
         return view
     }
 

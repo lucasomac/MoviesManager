@@ -26,6 +26,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var isEdit by Delegates.notNull<Boolean>()
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
     private lateinit var genderSelected: Gender
+    private var movieToEdit: Movie? = null
     private val genderAdapter: GenderAdapter by inject { parametersOf(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,10 +38,8 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isEdit = args.movie != null
-        val movie = args.movie
-        if (movie != null) {
-            populateForm(movie)
-        }
+        movieToEdit = args.movie
+        movieToEdit?.let { populateForm(it) }
         setupSpinnerGender()
         setupButtonSave()
     }
@@ -79,7 +78,7 @@ class RegisterMovieFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     rating = if (binding.ratingBar.rating != 0.0F) (binding.ratingBar.rating * 2).toInt() else null
                 )
                 if (isEdit) {
-                    movieViewModel.updateMovie(movie)
+                    movieViewModel.updateMovie(movie.copy(id = movieToEdit?.id!!))
                     findNavController().navigateUp()
                 } else {
                     movieViewModel.createMovie(movie)

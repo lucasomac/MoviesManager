@@ -29,7 +29,7 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     private var _binding: FragmentListMovieBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MovieViewModel by viewModel<MovieViewModel>()
-    private val movieAdapter: MovieAdapter by inject { parametersOf(this) }
+    private val movieAdapter: MovieAdapter = MovieAdapter(this)
     private val separator: Separator by inject { parametersOf(16) }
     private val sortSheet = SortBottomSheet(::onChangeSortSelection)
     override fun onCreateView(
@@ -90,6 +90,12 @@ class ListMovieFragment : Fragment(), MovieOnClickListener {
     private fun setupObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                movieViewModel.listOfMovies.collect {
+                    movieAdapter.submitList(it)
+                    binding.recyclerListMovie.adapter = movieAdapter
+                }
+            }
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 movieViewModel.listOfMovies.collect {
                     movieAdapter.submitList(it)
                     binding.recyclerListMovie.adapter = movieAdapter
